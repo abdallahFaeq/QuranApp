@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.quranapp.fragment.SplashScreen;
+import com.example.quranapp.model.SuraDetails;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.your_container, new SplashScreen())
                 .commit();
-
 
 
     }
