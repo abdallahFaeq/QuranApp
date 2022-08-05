@@ -1,6 +1,8 @@
 package com.example.quranapp.model;
 
-public class SuraDetails {
+import java.io.Serializable;
+
+public class SuraDetails implements Serializable{
     int number, numberOfAyahs;
     String name, englishName, englishNameTranslation, revelationType;
 

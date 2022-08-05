@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quranapp.databinding.ItemSurahBinding;
 import com.example.quranapp.model.SuraDetails;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.SurahHolder>{
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.SurahHolder>{
     Context mContext;
     List<SuraDetails> mSurahDetailsList;
-    public SurahAdapter(Context context, List<SuraDetails> suraDetailsList){
+    public HomeAdapter(Context context, List<SuraDetails> suraDetailsList){
         this.mContext = context;
         this.mSurahDetailsList = suraDetailsList;
     }
@@ -38,6 +38,15 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.SurahHolder>
         holder.mNumberOfSurah.setText(""+mSurah.getNumber());
         holder.mSurahType.setText(mSurah.getRevelationType());
         holder.mNumberOfAyat.setText(""+mSurah.getNumberOfAyahs());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null){
+                    onItemClickListener.onItemClick(holder.getAdapterPosition(), mSurah);
+                }
+            }
+        });
     }
 
     @Override
@@ -55,5 +64,14 @@ public class SurahAdapter extends RecyclerView.Adapter<SurahAdapter.SurahHolder>
             mNumberOfAyat = binding.numberOfAyatLabel;
             mNumberOfSurah = binding.surahNumerLabel;
         }
+    }
+    OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position, SuraDetails suraDetails);
     }
 }
