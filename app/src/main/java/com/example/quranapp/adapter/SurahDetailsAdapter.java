@@ -53,4 +53,8 @@ public class SurahDetailsAdapter extends RecyclerView.Adapter<SurahDetailsAdapte
             translation = binding.translation;
         }
     }
+    public void filter(ArrayList<SurahDetailsContent> surahs){
+        this.surahs = surahs;
+        notifyDataSetChanged();
+    }
 }

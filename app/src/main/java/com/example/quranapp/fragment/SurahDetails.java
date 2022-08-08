@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ import retrofit2.Retrofit;
 public class SurahDetails extends Fragment {
     FragmentSurahDetailsBinding binding;
     ArrayList<SurahDetailsContent> surahs;
+    SurahDetailsAdapter adapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,11 +76,36 @@ public class SurahDetails extends Fragment {
             }
         });
 
+        binding.searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
     }
     public void putDataInRecyclerView(ArrayList<SurahDetailsContent> surahs){
-        SurahDetailsAdapter adapter = new SurahDetailsAdapter(surahs,getContext());
+        adapter = new SurahDetailsAdapter(surahs,getContext());
         binding.surahDetailsRv.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.surahDetailsRv.setHasFixedSize(true);
         binding.surahDetailsRv.setAdapter(adapter);
+    }
+    public void filter(String id){
+        ArrayList<SurahDetailsContent> surahsList = new ArrayList<>();
+        for (SurahDetailsContent surahDetailsContent:surahs) {
+            if (String.valueOf(surahDetailsContent.getId()).contains(id)){
+                surahsList.add(surahDetailsContent);
+            }
+            adapter.filter(surahsList);
+        }
     }
 }
