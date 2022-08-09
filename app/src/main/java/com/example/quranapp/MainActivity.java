@@ -38,13 +38,14 @@ public class MainActivity extends AppCompatActivity implements HomeScreen.OnList
                 .commit();
     }
     // send data from this activity to surahDetails fragment when click item of home's recycler
-    public void sendDataToSurahDetailsFragment(SuraDetails suraDetails){
+    public void sendDataToSurahDetailsFragment(SuraDetails suraDetails, int position){
         SurahDetails surahDetails = new SurahDetails();
 
         launchSurahDetailsFragment(surahDetails);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("surahDetails",suraDetails);
+        bundle.putInt("position", position);
         surahDetails.setArguments(bundle);
     }
 
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements HomeScreen.OnList
     // recieve data from home fragment
     // implementation for click on item in recycler view that show suraDetails
     @Override
-    public void onListener(SuraDetails suraDetails) {
-        sendDataToSurahDetailsFragment(suraDetails);
+    public void onListener(SuraDetails suraDetails, int positon) {
+        sendDataToSurahDetailsFragment(suraDetails, positon);
     }
 
 
