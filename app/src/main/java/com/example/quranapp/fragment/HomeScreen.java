@@ -99,7 +99,7 @@ public class HomeScreen extends Fragment{
             @Override
             public void onItemClick(int position, SuraDetails suraDetails) {
                 if (onListenerToSendData != null){
-                    onListenerToSendData.onListener(suraDetails);
+                    onListenerToSendData.onListener(suraDetails, position);
                 }
             }
         });
@@ -111,7 +111,7 @@ public class HomeScreen extends Fragment{
     }
 
     public interface OnListenerToSendData{
-        void onListener(SuraDetails suraDetails);
+        void onListener(SuraDetails suraDetails, int position);
     }
 
     @Override

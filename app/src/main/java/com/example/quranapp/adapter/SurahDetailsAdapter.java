@@ -31,6 +31,7 @@ public class SurahDetailsAdapter extends RecyclerView.Adapter<SurahDetailsAdapte
         ItemContentOfSurahBinding binding = ItemContentOfSurahBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new SurahDetailsHolder(binding);
     }
+
     @Override
     public void onBindViewHolder(@NonNull SurahDetailsHolder holder, int position) {
         SurahDetailsContent surahDetailsContent = surahs.get(position);
